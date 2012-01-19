@@ -1,0 +1,8 @@
+* conventions
+** variable names
+- bash
+  all capitals (since less number of them?)
+- ncl
+  all small
+- capitalize
+  never unless we use any classes (OOP thinking too long)
