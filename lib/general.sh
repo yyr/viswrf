@@ -14,8 +14,6 @@ function yn ()
     esac
 }
 
-RESET=
-
 function green ()
 {
     echo

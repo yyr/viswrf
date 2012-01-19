@@ -1,3 +1,20 @@
+* About
+/vis/ualize /wrf/ model out put using ncl.
+
+* Dependencies
+* how to use
+- set VISWRF environmental variable in bashrc
+- go to results directory
+- run $VISWRF/conf.sh to create ~conf.ncl~
+- edit ~conf.ncl~ if necessary
+- call the scripts one
+
+#+name: demo
+#+BEGIN_SRC sh
+  ncl $VISWRF/XXX.ncl
+#+END_SRC
+
+
 * conventions
 ** variable names
 - bash
@@ -6,3 +23,5 @@
   all small
 - capitalize
   never unless we use any classes (OOP thinking too long)
+
+* License
