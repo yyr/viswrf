@@ -2,3 +2,9 @@
 *.o
 *.out
 *.html
+custom/*
+
+
+## Local Variables:
+## mode: conf
+## End:

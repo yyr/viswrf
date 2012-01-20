@@ -5,7 +5,6 @@ if [ "x${0}" == "x" ]; then
     echo "no args"
 fi
 
-conf_file="conf.ncl"
 VISWRF=$(cd `dirname $BASH_SOURCE`; pwd)
 # echo $VISWRF
 

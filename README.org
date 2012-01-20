@@ -14,6 +14,12 @@
   ncl $VISWRF/XXX.ncl
 #+END_SRC
 
+* customizations
+
+** bash level
+$VISWRF/custom/global_vars.sh
+** ncl level
+$VISWRF/custom/?.ncl
 
 * conventions
 ** variable names
