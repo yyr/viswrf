@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+. $VISWRF/lib/general.sh
+
+function usage ()
+{
+    echo "NO ARGS to $1"
+    echo "
+This is a wrapper function to run the ncl files in source directory.
+* first argument must be the ncl file in the source directory
+   (optionally you may leave the extention 'ncl')
+
+* Other arguments should be VAR VAL pairs. they will be passeed to the
+  ncl file at the begenning. it takes any number of arguments but first"
+
+}
+
+if [ $# -lt 1 ]; then
+    usage $0
+    exit
+fi
+
+if [ ! conf_file_present ]; then
+    red "conf.ncl is missing"
+    yn "do you want to create it"
+    if [ $? -eq 0 ]; then
+        $VISWRF/conf.sh
+    else
+        echo "Trying to continue without conf.ncl"
+    fi
+fi
+
+fun_to_call="${1%.[^.]*}" # strip out ".ncl" if present
+
+ncl $VISWRF/$fun_to_call.ncl
