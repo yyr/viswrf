@@ -28,3 +28,16 @@ function red ()
     echo  $(tput setaf 1) $@ $(tput sgr0)
     echo
 }
+
+## ---------------------------------------------------------------------
+# check a file conf file is already present
+
+function conf_file_present()
+{
+    if [ -f ./$conf_file ]; then
+        return 0;
+    else
+        return 1;
+    fi
+
+}
