@@ -1,15 +1,18 @@
+## some global variables
+conf_file="conf.ncl"
+
+## load Customisations if any
+. $VISWRF/custom/global_vars.sh
+
 function yn ()
 {
-    echo -n "$* [y/n]?"; read yn junk
+    echo -n "$* [y/n]? "; read yn junk
     case $yn in
         y|Y|yes|YES ) #true
             return 0
             ;;
         N|n|no|NO )  #false
             return 1
-            ;;
-        * )
-            echo "Please answere [y/n]"
             ;;
     esac
 }
