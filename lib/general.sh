@@ -35,9 +35,18 @@ function red ()
 function conf_file_present()
 {
     if [ -f ./$conf_file ]; then
-        return 0;
-    else
         return 1;
+
+    else
+        return 0;
     fi
 
+}
+
+## ---------------------------------------------------------------------
+# debugging
+
+function debug_mark()
+{
+    echo $1
 }
