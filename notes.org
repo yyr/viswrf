@@ -1,0 +1,12 @@
+
+* theoretical
+* computational
+* errors
+** fatal error while reading WRFUserARW.ncl file
+this is not the one stops the script
+* roadmap
+** todos [0/0]
+** TODO conversion of all shell scripts to Python
+** TODO clean scripts for each possible plot
+** TODO collate all the scripts run them in batch
+** TODO using pyngl instead of ncl
