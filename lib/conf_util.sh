@@ -53,7 +53,7 @@ function write_conf()
 {
     if [ conf_file_present ]; then
         red "conf file is already present"
-#        yn "do you want overwrite"
+        yn "do you want overwrite"
         if [  $? -ne 0 ]; then
             echo "Abort"
             exit 128

@@ -4,10 +4,12 @@
 ; License: GPL v3 or later. <http://www.gnu.org/licenses/gpl.html>
 ;
 ; Description:
-; ncl general parameter
+; load general universal settings that are never need to change in the
+; code. May be some helper functions which have nothing to do with the
+; output
 
-begin
+load "$VISWRF/lib/helpers.ncl"
 
 
-end
+
 ;;; param.ncl ends here
