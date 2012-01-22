@@ -43,7 +43,6 @@ function io_details()
 infile = "`ls *d$DOMID*`" + ".nc"
 ofile_prefix = "vw_" + "$RUNID"
 graphic_type = "$GTYPE"
-
 EOF
 }
 
@@ -64,10 +63,16 @@ function write_conf()
 
     ## intialize
     cat > $conf_file <<EOF
-load "\$VISWRF/param.ncl"
+load "\$VISWRF/primitive.ncl"
 
 EOF
     dir_details
     run_details
     io_details
+
+    # show thing that are written in conf file
+    echo
+    echo "--------------------------------------------------------------------"
+    cat $conf_file
+    echo "--------------------------------------------------------------------"
 }
