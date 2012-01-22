@@ -3,7 +3,7 @@
 *.out
 *.html
 custom/*
-
+__pycache__/
 
 ## Local Variables:
 ## mode: conf
