@@ -18,8 +18,6 @@ if vw_dir not in sys.path:
 #  Import ours module
 from viswrf import conf
 
-print(os.getcwd())
-
 
 # Local Variables:
 # mode: python

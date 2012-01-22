@@ -7,11 +7,11 @@
 ; Description:
 ;
 
-
+load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
 load "./conf.ncl"
-begin
 
-  infile = get_input_file()
+begin
+  a = addfile(infile , "r")
 
 
 

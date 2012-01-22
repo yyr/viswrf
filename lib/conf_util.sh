@@ -29,8 +29,19 @@ function run_details()
 {
     cat >> $conf_file <<EOF
 ; details about the run
-runid = $RUNID
-ndom = $NDOM
+runid = "$RUNID"
+domid = $DOMID
+
+EOF
+}
+
+function io_details()
+{
+    tmp=$1
+    cat >> $conf_file <<EOF
+; io details
+infile = "`ls *d$DOMID*`" + ".nc"
+ofile_prefix = "vw_" + "$RUNID"
 
 EOF
 }
@@ -41,7 +52,7 @@ function write_conf()
 {
     if [ conf_file_present ]; then
         red "conf file is already present"
-        yn "do you want overwrite"
+#        yn "do you want overwrite"
         if [  $? -ne 0 ]; then
             echo "Abort"
             exit 128
@@ -57,4 +68,5 @@ load "\$VISWRF/param.ncl"
 EOF
     dir_details
     run_details
+    io_details
 }

@@ -12,6 +12,13 @@ VISWRF=$(cd `dirname $BASH_SOURCE`; pwd)
 . $VISWRF/lib/general.sh
 . $VISWRF/lib/conf_util.sh
 
+## custom fields
+DOMID=03
+RUNID=con
+
+## directory customisations
+. custom.sh
+
 ## write the conf file
 write_conf
 if [ $? -eq 0 ]; then
