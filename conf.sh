@@ -15,9 +15,7 @@ VISWRF=$(cd `dirname $BASH_SOURCE`; pwd)
 ## custom fields
 DOMID=03
 RUNID=con
-
-## directory customisations
-. custom.sh
+GTYPE=ps
 
 ## write the conf file
 write_conf

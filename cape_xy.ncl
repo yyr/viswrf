@@ -12,7 +12,10 @@ load "./conf.ncl"
 
 begin
   a = addfile(infile , "r")
+  ofile = ofile_prefix + "cape_xy"
 
+  ;; output file reads from graphic
+  wks = gsn_open_wks(graphic_type,ofile)
 
 
 end

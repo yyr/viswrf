@@ -42,6 +42,7 @@ function io_details()
 ; io details
 infile = "`ls *d$DOMID*`" + ".nc"
 ofile_prefix = "vw_" + "$RUNID"
+graphic_type = "$GTYPE"
 
 EOF
 }
