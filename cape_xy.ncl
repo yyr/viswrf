@@ -24,7 +24,7 @@ begin
 ;;--------------------------------------------------------------------
 ; IO setup
   a = addfile(infile , "r")
-  ofile = ofile_prefix + "cape_xy"
+  ofile = ofile_prefix + "_" + plotid + "_xy"
 
 ;;--------------------------------------------------------------------
 ; time setup
@@ -57,12 +57,12 @@ begin
   varname = varname@$plotid$
   lev = lev@$varname$
   clevs = clevs@$varname$
-  dclevs = dclevs@$varname$
+;  dclevs = dclevs@$varname$
 
 ;;--------------------- cape calculation -----------------------------
   if ( varname .eq. "cape" ) then
 
-    do it = 0, nt, 5   ;; time loop
+    do it = 40, nt, 2   ;; time loop
 
       ;; hint what time
       print("Working on time: " + times(it))
@@ -73,15 +73,18 @@ begin
       res@TimeLabel = times(it)   ; Set Valid time to use on plots
       res@gsnSpreadColors = True    ;spread Colors
 
-      opts@cnFillOn         = True
-      opts@cnFillColor = True
+      res@cnFillOn = True
+      res@cnLevelSelectionMode = "ExplicitLevels"
+      res@cnLinesOn = False
+      res@cnLevels = clevs
 
 ;      printVarSummary(cape)
 
-;      opts@ContourParameters = (/ 0., 2.6, .02 /)
+      opts@cnLevels = clevs
+      pltres@title = "CAPE at time " + times(it)
 
-     contour = wrf_contour(a,wks,cape(1,:,:),opts)
-     plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
+      contour = wrf_contour(a,wks,cape(1,:,:),opts)
+      plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
 
     end do
 

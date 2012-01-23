@@ -10,13 +10,13 @@ begin
     varname = ""
     varname_y = ""
     lev = 0
-    nclev = 15
+    nclev = 20
     clevs = new(nclev, float)
     dclevs = clevs
 
     varname@cape = "cape"
     lev@cape = 0
-    clevs@cape = fspan(230., 300., nclev)
+    clevs@cape = fspan(0., .7, nclev)
     dclevs@cape = (/-8., -6., -5., -4., -3., -2., -1., 0., \
                      1.,  2.,  3.,  4.,  5.,  6.,  8./)
 
