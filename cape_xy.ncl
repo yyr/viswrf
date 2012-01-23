@@ -8,15 +8,32 @@
 ;
 
 load "$NCARG_ROOT/lib/ncarg/nclscripts/wrf/WRFUserARW.ncl"
-load "./conf.ncl"
+load "$VISWRF/dict_xy.ncl"     ; default setup for xy plot
+
+
+;;
+load "./conf.ncl"               ; CUSTOMIZE HERE
+
+plotid = "cape"
 
 begin
+
   a = addfile(infile , "r")
   ofile = ofile_prefix + "cape_xy"
 
-  ;; output file reads from graphic
+;;----------------------- graphic mode --------------------------------
   wks = gsn_open_wks(graphic_type,ofile)
+  gsn_define_colormap(wks,"WhViBlGrYeOrReWh")
 
+  varname = varname@$plotid$
+
+
+;;--------------------- cape calculation -----------------------------
+  if ( varname .eq. cape ) then
+    lev = lev@$varname$
+    print(lev)
+
+  end if
 
 end
 ;;; cape_xy.ncl ends here
