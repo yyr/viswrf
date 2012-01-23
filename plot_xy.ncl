@@ -18,10 +18,6 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 ;; time for all
 ; tsvals
 
-;; diffp
-diffp_top_level = 1500.
-
-
 ;;--------------------------------------------------------------------
 ; some procedures
 ;---------------------------------------------------------------------
@@ -128,8 +124,6 @@ begin
 ;;--------------------- diffp -----------------------------
   if ( varname .eq. "diffp" ) then
 
-    announce("the great is here")
-
     do it = 40, nt, 2   ;; time loop
 
       ;; hint what time
@@ -151,6 +145,9 @@ begin
     end do
 
   end if ;;-- diffp  --
+
+;;--------------------- zave_wind -----------------------------
+
 
 end
 ;;; plot_xy.ncl ends here
