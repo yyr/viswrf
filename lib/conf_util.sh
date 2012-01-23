@@ -18,11 +18,10 @@ function get_ndom ()
 function conf_comment_add()
 {
     cat >> $conf_file <<EOF
+
 ;; ---------------------------------------------------------------------
-"; $@"
+; $@
 EOF
-
-
 }
 
 function dir_details ()
@@ -64,6 +63,17 @@ diffp_top_level = 1500.
 EOF
 }
 
+function zave_wind_details()
+{
+    cat >> $conf_file <<EOF
+
+;; zave_wind
+zave_wind_top_lev = 5
+EOF
+}
+
+
+
 ## ---------------------------------------------------------------------
 # writes the conf file
 function write_conf()
@@ -88,7 +98,10 @@ EOF
     run_details
     io_details
 
+    conf_comment_add  plot_xy
+
     diffp_details
+    zave_wind_details
 
     # show thing that are written in conf file
     echo

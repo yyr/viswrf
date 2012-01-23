@@ -18,9 +18,6 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 ;; time for all
 ; tsvals
 
-;; zave_wind
-zave_wind_top_lev = 5
-
 ;;--------------------------------------------------------------------
 ; some procedures
 ;---------------------------------------------------------------------
