@@ -22,6 +22,52 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 diffp_top_level = 1500.
 
 
+;;--------------------------------------------------------------------
+; some procedures
+;---------------------------------------------------------------------
+; procedure: plot_xy_set_con_att
+; Doc: sets contour plot con_attributes
+; op = resources
+;     cl array of levels
+;---------------------------------------------------------------------
+undef("plot_xy_set_con_att")
+procedure plot_xy_set_con_att(op:logical,cl)
+local op, cl
+
+begin
+
+  op@gsnSpreadColors = True    ;spread Colors
+  op@cnFillOn = True
+  op@cnLevelSelectionMode = "ExplicitLevels"
+  op@cnLinesOn = False
+  op@cnLevels = cl
+  op@Footer = False
+  op@InitTime = False
+
+  return
+end
+;- |plot_xy_set_con_att| ends here --
+
+;---------------------------------------------------------------------
+; procedure: plot_xy_set_map_att
+; Doc:
+;---------------------------------------------------------------------
+undef("plot_xy_set_map_att")
+procedure plot_xy_set_map_att(mp:logical)
+local mp, tmp
+
+begin
+
+  mp@mpDataBaseVersion    = "HighRes"
+  mp@mpGeophysicalLineThicknessF = 2.0
+  mp@pmTickMarkDisplayMode = "Always"
+
+  return
+end
+;- |plot_xy_set_map_att| ends here --
+
+
+
 begin
 ;;--------------------------------------------------------------------
 ; IO setup
@@ -44,19 +90,11 @@ begin
   res = True
   opts = res
   pltres = True ; Plot resources
-
   mpres  = True  ; Map resources
-  mpres@mpDataBaseVersion    = "HighRes"
-  mpres@mpGeophysicalLineThicknessF = 2.0
-  mpres@pmTickMarkDisplayMode = "Always"
-
-  opts@Footer = False
-  opts@InitTime = False
 
 ;;--------------------------------------------------------------------
 ; initialize graph
   plot = new(nt,graphic)
-
 
 ;;--------------- grab the fields defined in the dictionary -----------
   varname = varname@$plotid$
@@ -76,12 +114,7 @@ begin
       cape  = wrf_user_getvar(a,"cape_2d",it) ; cape retrieve
 
       opts@TimeLabel = times(it)   ; Set Valid time to use on plots
-      opts@gsnSpreadColors = True    ;spread Colors
-
-      opts@cnFillOn = True
-      opts@cnLevelSelectionMode = "ExplicitLevels"
-      opts@cnLinesOn = False
-      opts@cnLevels = clevs
+      plot_xy_set_con_att(opts,clevs)
 
       pltres@title = "CAPE at time " + times(it)
 
@@ -107,16 +140,10 @@ begin
       p  = wrf_user_getvar(a, "pressure",it) ; pressure is our vertical coordinate
       z  = wrf_user_getvar(a, "z",it)        ; grid point height
       p_top_level  = wrf_user_intrp3d( p,z,"h",diffp_top_level,0.,False)
-
       p_diff = slp - p_top_level
 
       opts@TimeLabel = times(it)   ; Set Valid time to use on plots
-      opts@gsnSpreadColors = True    ;spread Colors
-
-      opts@cnFillOn = True
-      opts@cnLevelSelectionMode = "ExplicitLevels"
-      opts@cnLinesOn = False
-      opts@cnLevels = clevs
+      plot_xy_set_con_att(opts,clevs)
 
       contour = wrf_contour(a,wks,p_diff,opts)
       plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
