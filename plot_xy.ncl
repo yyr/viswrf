@@ -18,6 +18,9 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 ;; time for all
 ; tsvals
 
+;; zave_wind
+zave_wind_top_lev = 5
+
 ;;--------------------------------------------------------------------
 ; some procedures
 ;---------------------------------------------------------------------
@@ -27,18 +30,19 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 ;     cl array of levels
 ;---------------------------------------------------------------------
 undef("plot_xy_set_con_att")
-procedure plot_xy_set_con_att(op:logical,cl)
-local op, cl
+procedure plot_xy_set_con_att(op:logical,cl,tit:string)
+local op, cl,tit
 
 begin
-
   op@gsnSpreadColors = True    ;spread Colors
   op@cnFillOn = True
   op@cnLevelSelectionMode = "ExplicitLevels"
   op@cnLinesOn = False
-  op@cnLevels = cl
   op@Footer = False
   op@InitTime = False
+
+  op@FieldTitle = tit       ; overwrite Field Title
+  op@cnLevels = cl
 
   return
 end
@@ -49,18 +53,63 @@ end
 ; Doc:
 ;---------------------------------------------------------------------
 undef("plot_xy_set_map_att")
-procedure plot_xy_set_map_att(mp:logical)
+procedure plot_xy_set_map_att(mp:logical,col)
 local mp, tmp
 
 begin
 
   mp@mpDataBaseVersion    = "HighRes"
   mp@mpGeophysicalLineThicknessF = 2.0
+  mp@mpGeophysicalLineThicknessF = 2.0
   mp@pmTickMarkDisplayMode = "Always"
+  mp@mpFillOn = True
+  mp@mpGeophysicalLineColor      = "Black"
+  mp@mpGridLineColor             = "Black"
+  mp@mpLimbLineColor             = "Black"
+  mp@mpNationalLineColor         = "Black"
+  mp@mpPerimLineColor            = "Black"
+  mp@mpUSStateLineColor          = "Black"
 
   return
 end
 ;- |plot_xy_set_map_att| ends here --
+
+;---------------------------------------------------------------------
+; procedure: plot_xy_set_vec_att
+; Doc:
+;---------------------------------------------------------------------
+undef("plot_xy_set_vec_att")
+procedure plot_xy_set_vec_att(vec:logical,vl)
+local vec, vl
+
+begin
+
+  vec@FieldTitle = "Wind"       ; overwrite Field Title
+  vec@InitTime = False
+  vec@vcGlyphStyle = "LineArrow"
+  vec@vcMonoLineArrowColor = False
+  vec@gsnSpreadColors     = True      ; use full colormap
+  vec@vcGlyphStyle        = "CurlyVector"    ; turn on curly vectors
+
+  return
+end
+;- |plot_xy_set_vec_att| ends here --
+
+;---------------------------------------------------------------------
+; procedure: plot_xy_set_plt_att
+; Doc:
+;---------------------------------------------------------------------
+undef("plot_xy_set_plt_att")
+procedure plot_xy_set_plt_att(plt:logical,tit:string)
+local plt,tit
+
+begin
+  plt@MainTitlePos= tit
+
+  return
+end
+;- |plot_xy_set_plt_att| ends here --
+
 
 
 
@@ -88,6 +137,8 @@ begin
   pltres = True ; Plot resources
   mpres  = True  ; Map resources
 
+  plot_xy_set_map_att(mpres)
+
 ;;--------------------------------------------------------------------
 ; initialize graph
   plot = new(nt,graphic)
@@ -110,9 +161,7 @@ begin
       cape  = wrf_user_getvar(a,"cape_2d",it) ; cape retrieve
 
       opts@TimeLabel = times(it)   ; Set Valid time to use on plots
-      plot_xy_set_con_att(opts,clevs)
-
-      pltres@title = "CAPE at time " + times(it)
+      plot_xy_set_con_att(opts,clevs,"CAPE")
 
       contour = wrf_contour(a,wks,cape(1,:,:),opts)
       plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
@@ -137,7 +186,10 @@ begin
       p_diff = slp - p_top_level
 
       opts@TimeLabel = times(it)   ; Set Valid time to use on plots
-      plot_xy_set_con_att(opts,clevs)
+      plot_xy_set_con_att(opts,clevs,"Diff_p")
+
+      title = "CAPE" + stringtochar(times(it))
+      plot_xy_set_plt_att(pltres,title)
 
       contour = wrf_contour(a,wks,p_diff,opts)
       plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
@@ -148,6 +200,41 @@ begin
 
 ;;--------------------- zave_wind -----------------------------
 
+  if ( varname .eq. "zave_wind" ) then
+
+    do it = 40, nt, 2   ;; time loop
+
+      ;; hint what time
+      print("Working on time: " + times(it))
+
+      ;;-- calcualtion  --
+      u = wrf_user_getvar(a,"ua",it) ; at mass point
+      v = wrf_user_getvar(a,"va",it) ; at mass point
+
+      u_lev_sum = u(1,:,:)      ;first level
+      v_lev_sum = v(1,:,:)
+
+      do le = 1, zave_wind_top_lev - 1 , 1 ;; level loop from 2 level
+        u_lev_sum = u_lev_sum + u(le,:,:)
+        v_lev_sum = v_lev_sum + v(le,:,:)
+      end do
+
+      u_lev_sum = u_lev_sum / zave_wind_top_lev
+      v_lev_sum = v_lev_sum / zave_wind_top_lev
+
+      mpres@mpFillColors  = (/"background","DeepSkyBlue","ForestGreen","DeepSkyBlue", "transparent"/)
+
+      opts@TimeLabel = times(it)   ; Set Valid time to use on plots
+      plot_xy_set_vec_att(opts,clevs)
+
+      vector = wrf_vector(a,wks,u_lev_sum(:,:),v_lev_sum(:,:),opts)
+      plot(it) = wrf_map_overlays(a,wks,(/vector/),pltres,mpres)
+
+      delete(vector)
+
+    end do
+
+  end if ;;-- diffp  --
 
 end
 ;;; plot_xy.ncl ends here

@@ -14,6 +14,7 @@ begin
   clevs = new(nclev, float)
 ;  dclevs = clevs
 
+
   varname@cape = "cape"
   lev@cape = 0
   clevs@cape = fspan(-0.1, .3, nclev)
@@ -21,6 +22,10 @@ begin
   varname@diffp = "diffp"
   lev@diffp = 0
   clevs@diffp = fspan(165.,180.,nclev)
+
+  varname@zave_wind = "zave_wind"
+  lev@zave_wind = 0
+  clevs@zave_wind = fspan(165.,180.,nclev)
 
 end
 
