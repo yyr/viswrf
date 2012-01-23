@@ -16,6 +16,8 @@ This is a wrapper function to run the ncl files in source directory.
 
 }
 
+plot_xy=( cape diffp )
+
 if [ $# -lt 1 ]; then
     usage $0
     exit

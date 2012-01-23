@@ -7,19 +7,21 @@
 ; Description:
 ;
 begin
-    varname = ""
-    varname_y = ""
-    lev = 0
-    nclev = 20
-    clevs = new(nclev, float)
-    dclevs = clevs
+  varname = ""
+  varname_y = ""
+  lev = 0
+  nclev = 20
+  clevs = new(nclev, float)
+  dclevs = clevs
 
-    varname@cape = "cape"
-    lev@cape = 0
-    clevs@cape = fspan(-0.1, .3, nclev)
-    dclevs@cape = (/-8., -6., -5., -4., -3., -2., -1., 0., \
-                     1.,  2.,  3.,  4.,  5.,  6.,  8./)
+  varname@cape = "cape"
+  lev@cape = 0
+  clevs@cape = fspan(-0.1, .3, nclev)
 
+
+  varname@diffp = "diffp"
+  lev@diffp = 0
+  clevs@diffp = fspan(165.,180.,76)
 
 end
 

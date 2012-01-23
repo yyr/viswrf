@@ -14,6 +14,14 @@ load "$VISWRF/dict_xy.ncl"     ; default setup for xy plot
 load "./conf.ncl"               ; CUSTOMIZE HERE
 load "$TMP/tmp_conf.ncl"             ; for command line options
 
+;; should be sent to conf.ncl
+;; time for all
+; tsvals
+
+;; diffp
+diffp_top_level = 1500.
+
+
 begin
 ;;--------------------------------------------------------------------
 ; IO setup
@@ -54,7 +62,6 @@ begin
   varname = varname@$plotid$
   lev = lev@$varname$
   clevs = clevs@$varname$
-;  dclevs = dclevs@$varname$
 
 ;;--------------------- cape calculation -----------------------------
   if ( varname .eq. "cape" ) then
@@ -76,9 +83,6 @@ begin
       opts@cnLinesOn = False
       opts@cnLevels = clevs
 
-;      printVarSummary(cape)
-
-      opts@cnLevels = clevs
       pltres@title = "CAPE at time " + times(it)
 
       contour = wrf_contour(a,wks,cape(1,:,:),opts)
@@ -88,7 +92,38 @@ begin
 
   end if ;;-- cape  --
 
+;;--------------------- diffp -----------------------------
+  if ( varname .eq. "diffp" ) then
 
+    announce("the great is here")
+
+    do it = 40, nt, 2   ;; time loop
+
+      ;; hint what time
+      print("Working on time: " + times(it))
+
+      ;;-- calcualtion  --
+      slp = wrf_user_getvar(a,"slp",it)
+      p  = wrf_user_getvar(a, "pressure",it) ; pressure is our vertical coordinate
+      z  = wrf_user_getvar(a, "z",it)        ; grid point height
+      p_top_level  = wrf_user_intrp3d( p,z,"h",diffp_top_level,0.,False)
+
+      p_diff = slp - p_top_level
+
+      opts@TimeLabel = times(it)   ; Set Valid time to use on plots
+      opts@gsnSpreadColors = True    ;spread Colors
+
+      opts@cnFillOn = True
+      opts@cnLevelSelectionMode = "ExplicitLevels"
+      opts@cnLinesOn = False
+      opts@cnLevels = clevs
+
+      contour = wrf_contour(a,wks,p_diff,opts)
+      plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
+
+    end do
+
+  end if ;;-- diffp  --
 
 end
 ;;; plot_xy.ncl ends here
