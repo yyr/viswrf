@@ -55,6 +55,15 @@ graphic_type = "$GTYPE"
 EOF
 }
 
+function diffp_details()
+{
+    cat >> $conf_file <<EOF
+
+;; diffp
+diffp_top_level = 1500.
+EOF
+}
+
 ## ---------------------------------------------------------------------
 # writes the conf file
 function write_conf()
@@ -78,6 +87,8 @@ EOF
     dir_details
     run_details
     io_details
+
+    diffp_details
 
     # show thing that are written in conf file
     echo
