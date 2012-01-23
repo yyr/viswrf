@@ -4,7 +4,7 @@
 *.html
 custom/*
 __pycache__/
-TAG
+TAGS
 
 ## Local Variables:
 ## mode: conf
