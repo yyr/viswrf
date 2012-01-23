@@ -16,7 +16,7 @@ begin
 
     varname@cape = "cape"
     lev@cape = 0
-    clevs@cape = fspan(0., .7, nclev)
+    clevs@cape = fspan(-0.1, .3, nclev)
     dclevs@cape = (/-8., -6., -5., -4., -3., -2., -1., 0., \
                      1.,  2.,  3.,  4.,  5.,  6.,  8./)
 

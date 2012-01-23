@@ -36,14 +36,17 @@ begin
 
 ;;----------------------- graphic mode --------------------------------
   wks = gsn_open_wks(graphic_type,ofile)
-  gsn_define_colormap(wks,"WhViBlGrYeOrReWh")
 
 ;;--------------------------------------------------------------------
 ; Initial resources esources
   res = True
   opts = res
-  mpres  = True  ; Map resources
   pltres = True ; Plot resources
+
+  mpres  = True  ; Map resources
+  mpres@mpDataBaseVersion    = "HighRes"
+  mpres@mpGeophysicalLineThicknessF = 2.0
+  mpres@pmTickMarkDisplayMode = "Always"
 
   opts@Footer = False
   opts@InitTime = False
@@ -62,6 +65,7 @@ begin
 ;;--------------------- cape calculation -----------------------------
   if ( varname .eq. "cape" ) then
 
+    gsn_define_colormap(wks,"WhiteYellowOrangeRed")
     do it = 40, nt, 2   ;; time loop
 
       ;; hint what time
@@ -70,13 +74,13 @@ begin
       ;;-- calcualtion  --
       cape  = wrf_user_getvar(a,"cape_2d",it) ; cape retrieve
 
-      res@TimeLabel = times(it)   ; Set Valid time to use on plots
-      res@gsnSpreadColors = True    ;spread Colors
+      opts@TimeLabel = times(it)   ; Set Valid time to use on plots
+      opts@gsnSpreadColors = True    ;spread Colors
 
-      res@cnFillOn = True
-      res@cnLevelSelectionMode = "ExplicitLevels"
-      res@cnLinesOn = False
-      res@cnLevels = clevs
+      opts@cnFillOn = True
+      opts@cnLevelSelectionMode = "ExplicitLevels"
+      opts@cnLinesOn = False
+      opts@cnLevels = clevs
 
 ;      printVarSummary(cape)
 
