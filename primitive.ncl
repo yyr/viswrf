@@ -10,6 +10,4 @@
 
 load "$VISWRF/lib/helpers.ncl"
 
-
-
 ;;; primitive.ncl ends here

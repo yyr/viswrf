@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . $VISWRF/lib/general.sh
+. $VISWRF/lib/conf_util.sh
 
 function usage ()
 {
@@ -30,6 +31,14 @@ if [ ! conf_file_present ]; then
     fi
 fi
 
-fun_to_call="${1%.[^.]*}" # strip out ".ncl" if present
+## ----------------------
+tmp_conf_begin
+tmp_conf_write_opt "plotid" $1
+tmp_conf_write_opt_num "tvals"  -1
+tmp_conf_end
+## ----------------------
 
-ncl $VISWRF/$fun_to_call.ncl
+## fun_to_call="${1%.[^.]*}" # strip out ".ncl" if present
+## ncl $VISWRF/$fun_to_call.ncl
+
+ncl $VISWRF/plot_xy.ncl

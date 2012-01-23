@@ -1,5 +1,9 @@
 ## some global variables
+export TMP="/tmp"
+
 conf_file="conf.ncl"
+tmp_conf="$TMP/tmp_conf.ncl"
+
 
 ## load Customisations if any
 . $VISWRF/custom/global_vars.sh
