@@ -53,7 +53,7 @@ end
 ; Doc:
 ;---------------------------------------------------------------------
 undef("plot_xy_set_map_att")
-procedure plot_xy_set_map_att(mp:logical,col)
+procedure plot_xy_set_map_att(mp:logical)
 local mp, tmp
 
 begin
