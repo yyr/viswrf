@@ -38,10 +38,10 @@ function red ()
 function conf_file_present()
 {
     if [ -f ./$conf_file ]; then
-        return 1;
+        return 0;
 
     else
-        return 0;
+        return 1;
     fi
 
 }
