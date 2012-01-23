@@ -10,18 +10,17 @@ begin
   varname = ""
   varname_y = ""
   lev = 0
-  nclev = 20
+  nclev = 30
   clevs = new(nclev, float)
-  dclevs = clevs
+;  dclevs = clevs
 
   varname@cape = "cape"
   lev@cape = 0
   clevs@cape = fspan(-0.1, .3, nclev)
 
-
   varname@diffp = "diffp"
   lev@diffp = 0
-  clevs@diffp = fspan(165.,180.,76)
+  clevs@diffp = fspan(165.,180.,nclev)
 
 end
 

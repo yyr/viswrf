@@ -50,7 +50,7 @@ function io_details()
     cat >> $conf_file <<EOF
 ; io details
 infile = "`ls *d$DOMID*`" + ".nc"
-ofile_prefix = "vw_" + "$RUNID"
+ofile_prefix = "vw_" + "$RUNID" + "_" + domid
 graphic_type = "$GTYPE"
 EOF
 }
