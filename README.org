@@ -31,3 +31,9 @@ $VISWRF/custom/?.ncl
   never unless we use any classes (OOP thinking too long)
 
 * License
+
+* Acknowledgment
+The structure is based on
+https://github.com/tenomoto/ncl-diag
+
+Sincere thanks to the author of ncl-diag
