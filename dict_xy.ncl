@@ -27,6 +27,11 @@ begin
   lev@zave_wind = 0
   clevs@zave_wind = fspan(165.,180.,nclev)
 
+
+  varname@moist_tr = "moist_tr"
+  lev@moist_tr = 0
+  clevs@moist_tr = fspan(165.,180.,nclev)
+
 end
 
 ;;; dict_xy.ncl ends here

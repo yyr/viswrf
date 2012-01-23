@@ -57,15 +57,13 @@ begin
 
   mp@mpDataBaseVersion    = "HighRes"
   mp@mpGeophysicalLineThicknessF = 2.0
-  mp@mpGeophysicalLineThicknessF = 2.0
   mp@pmTickMarkDisplayMode = "Always"
-  mp@mpFillOn = True
+
   mp@mpGeophysicalLineColor      = "Black"
   mp@mpGridLineColor             = "Black"
   mp@mpLimbLineColor             = "Black"
   mp@mpNationalLineColor         = "Black"
   mp@mpPerimLineColor            = "Black"
-  mp@mpUSStateLineColor          = "Black"
 
   return
 end
