@@ -5,15 +5,17 @@ VISualize WRF
 * INTRO
 if you try to write ncl scripts to plot wrf output, you have to write
 awful lot of code again and again. This is a framework to VISualize
-WRF follows the rule [[http://en.wikipedia.org/wiki/DRY][DRY]].
+WRF which follows the rule [[http://en.wikipedia.org/wiki/DRY][DRY]].
 
 * Dependencies
 you need to have ncl and python3 installed on your computer
 
 * how to use
 - go to results directory
+
 - create conf.ncl script by calling vw.
   : wv conf
+
 - edit ~conf.ncl~ if necessary
 
 finally call
