@@ -1,6 +1,6 @@
 VISualize WRF
 
-* NOTE: not usable right please come back soon
+* NOTE: not usable right now please come back soon
 
 * INTRO
 if you try to write ncl scripts to plot wrf output, you have to write
@@ -30,3 +30,4 @@ to see what VISWRF can plot.
 GPL v3 or later
 
 * Acknowledgment
+see the cite file
