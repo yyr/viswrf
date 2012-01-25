@@ -9,16 +9,17 @@
 #
 
 # add our module in python path
-import os, sys, inspect
-vw_dir = os.path.abspath(os.path.split(inspect.getfile(
+import os
+import sys
+import inspect
+
+VISWRFDIR = os.path.abspath(os.path.split(inspect.getfile(
     inspect.currentframe()))[0])
-if vw_dir not in sys.path:
-    sys.path.insert(0, vw_dir)
 
-#  Import ours module
-from viswrf import conf
+if VISWRFDIR not in sys.path:
+    sys.path.insert(0, VISWRFDIR)
 
+#  import package
+import viswrf
 
-# Local Variables:
-# mode: python
-# End:
+viswrf.main()
