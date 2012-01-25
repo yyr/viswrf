@@ -1,39 +1,32 @@
-* About
-/vis/ualize /wrf/ model out put using ncl.
+VISualize WRF
+
+* NOTE: not usable right please come back soon
+
+* INTRO
+if you try to write ncl scripts to plot wrf output, you have to write
+awful lot of code again and again. This is a framework to VISualize
+WRF follows the rule [[http://en.wikipedia.org/wiki/DRY][DRY]].
 
 * Dependencies
+you need to have ncl and python3 installed on your computer
+
 * how to use
-- set VISWRF environmental variable in bashrc
 - go to results directory
-- run $VISWRF/conf.sh to create ~conf.ncl~
+- create conf.ncl script by calling vw.
+  : wv conf
 - edit ~conf.ncl~ if necessary
-- call the scripts one
 
-#+name: demo
-#+BEGIN_SRC sh
-  ncl $VISWRF/XXX.ncl
-#+END_SRC
+finally call
+: vw --help
+to see what VISWRF can plot.
 
-* customizations
+* customizations to the plots.
 
-** bash level
-$VISWRF/custom/global_vars.sh
-** ncl level
-$VISWRF/custom/?.ncl
-
-* conventions
-** variable names
-- bash
-  all capitals (since less number of them?)
-- ncl
-  all small
-- capitalize
-  never unless we use any classes (OOP thinking too long)
+- all user customizations are to be made in the ~conf.ncl~ in the
+  results directory.
+- each results directory should have a ~conf.ncl~ script
 
 * License
+GPL v3 or later
 
 * Acknowledgment
-The structure is based on
-https://github.com/tenomoto/ncl-diag
-
-Sincere thanks to the author of ncl-diag
