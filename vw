@@ -23,3 +23,8 @@ if VISWRFDIR not in sys.path:
 import viswrf
 
 viswrf.main()
+
+
+# Local Variables:
+# mode: python
+# End:

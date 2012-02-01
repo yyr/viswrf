@@ -11,43 +11,19 @@ import os
 import sys
 
 
-def parseOpts():
-    """bring Options
-    """
-    import optparse
-
-    parser = optparse.OptionParser()
-
-    # option groups
-    general = optparse.OptionGroup(parser, 'General Options')
-    #    dirconfig  = optparse.OptionGroup(parser, 'Configuration Options For Directories')
-
-    plottype = optparse.OptionGroup(parser,
-        'Plot Options')
-
-
-    general.add_option('-v', '--version',
-        action='version', help='P')
-
-    plottype.add_option("xy",
-        action='store_true', dest='plot_type', help=" Plot Type XY")
-
-
-    parser.add_option_group(general)
-    parser.add_option_group(plotxy)
-
-    opts, args = parser.parse_args(argv)
-
-    return parser, opts, args
-
-
 def main():
-    parser, opts, args = parseOpts()
+    import argparse
 
-    if args.length == 0:
-        print("no args")
-    else:
-        print("Good JOB")
+    parser = argparse.ArgumentParser(description='Configuration and Plotting Options')
 
+    parser.add_argument('plotid', action="append",
+                        help='Plot type')
+    parser.add_argument('conf', action='append',
+                        help='Configuration Options')
+
+    args = parser.parse_args()
+
+
+# ---------------------
 if __name__ == '__main__':
     main()
