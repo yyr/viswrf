@@ -142,5 +142,82 @@ begin
 
   end if ;;-- diffp  --
 
+
+;;------------------------ divergence 10m level ----------------------
+
+  if ( varname .eq. "div10" ) then
+
+    do it = 48, nt, 2   ;; time loop
+
+      ;; hint what time
+      print("Working on time: " + times(it))
+
+      ;;-- calcualtion  --
+      u = wrf_user_getvar(a,"U10",(it))
+      v = wrf_user_getvar(a,"V10",(it))
+
+      dim=dimsizes(u)
+      dx = 1500                  ; horizontal grid distance in x direction
+
+      div=new( (/ dim(0), dim(1) /) , typeof(u))
+
+      div10 = uv2dvG(u,v)
+      div10 = div * dx
+
+      mpres@mpFillColors  = (/"background","DeepSkyBlue","ForestGreen","DeepSkyBlue", "transparent"/)
+
+
+      opts@TimeLabel = times(it)   ; Set Valid time to use on plots
+      plot_xy_set_con_att(opts,clevs,"div10")
+
+      title = "div10" + stringtochar(times(it))
+      plot_xy_set_plt_att(pltres,title)
+
+      contour = wrf_contour(a,wks,div10,opts)
+      plot = wrf_map_overlays(a,wks,(/contour/),pltres,mpres)
+
+      delete(contour)
+
+    end do
+
+  end if ;;-- div10  --
+
+  if ( varname .eq. "temp2m" ) then
+
+    do it = 28, end, 2   ;; time
+
+      ;; hint what time
+      print("Working on time: " + times(it))
+
+      ;;-- calcualtion  --
+      u = wrf_user_getvar(a,"ua",it) ; at mass point
+      v = wrf_user_getvar(a,"va",it) ; at mass point
+
+      u_lev_sum = u(1,:,:)      ;first level
+      v_lev_sum = v(1,:,:)
+
+      do le = 1, zave_wind_top_lev - 1 , 1 ;; level loop from 2 level
+        u_lev_sum = u_lev_sum + u(le,:,:)
+        v_lev_sum = v_lev_sum + v(le,:,:)
+      end do
+
+      u_lev_sum = u_lev_sum / zave_wind_top_lev
+      v_lev_sum = v_lev_sum / zave_wind_top_lev
+
+      mpres@mpFillColors  = (/"background","DeepSkyBlue","ForestGreen","DeepSkyBlue", "transparent"/)
+
+      opts@TimeLabel = times(it)   ; Set Valid time to use on plots
+      plot_xy_set_vec_att(opts,clevs)
+
+      vector = wrf_vector(a,wks,u_lev_sum(:,:),v_lev_sum(:,:),opts)
+      plot(it) = wrf_map_overlays(a,wks,(/vector/),pltres,mpres)
+
+      delete(vector)
+
+    end do
+
+  end if
+
+
 end
 ;;; plot_xy.ncl ends here

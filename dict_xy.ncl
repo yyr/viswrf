@@ -32,6 +32,10 @@ begin
   lev@moist_tr = 0
   clevs@moist_tr = fspan(165.,180.,nclev)
 
+  varname@div10 = "div10"
+  lev@div10 = 0
+  clevs@div10 = fspan(-.2, 0.2, nclev)
+
 end
 
 ;;; dict_xy.ncl ends here

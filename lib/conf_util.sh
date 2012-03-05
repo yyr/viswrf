@@ -72,6 +72,14 @@ zave_wind_top_lev = 5
 EOF
 }
 
+function div10_details()
+{
+    cat >> $conf_file <<EOF
+
+;; div10
+zave_wind_top_lev = 5
+EOF
+}
 
 
 ## ---------------------------------------------------------------------
@@ -102,6 +110,7 @@ EOF
 
     diffp_details
     zave_wind_details
+    div10_details
 
     # show thing that are written in conf file
     echo
