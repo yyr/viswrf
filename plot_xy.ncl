@@ -58,7 +58,7 @@ begin
   if ( varname .eq. "cape" ) then
 
     gsn_define_colormap(wks,"WhiteYellowOrangeRed")
-    do it = 40, nt, 2   ;; time loop
+    do it = 48, nt, 2   ;; time loop
 
       ;; hint what time
       print("Working on time: " + times(it))
@@ -79,7 +79,7 @@ begin
 ;;--------------------- diffp -----------------------------
   if ( varname .eq. "diffp" ) then
 
-    do it = 40, nt, 2   ;; time loop
+    do it = 48, nt, 2   ;; time loop
 
       ;; hint what time
       print("Working on time: " + times(it))
@@ -108,7 +108,7 @@ begin
 
   if ( varname .eq. "zave_wind" ) then
 
-    do it = 40, nt, 2   ;; time loop
+    do it = 48, nt, 2   ;; time loop
 
       ;; hint what time
       print("Working on time: " + times(it))
