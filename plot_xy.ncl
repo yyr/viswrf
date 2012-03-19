@@ -184,7 +184,7 @@ begin
 
   if ( varname .eq. "temp2m" ) then
 
-    do it = 28, end, 2   ;; time
+    do it = 28, nt, 2   ;; time
 
       ;; hint what time
       print("Working on time: " + times(it))
