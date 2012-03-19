@@ -49,7 +49,7 @@ function io_details()
     cat >> $conf_file <<EOF
 ; io details
 infile = "`ls *d$DOMID*`" + ".nc"
-ofile_prefix = "vw_" + "$RUNID" + "_" + domid
+ofile_prefix = "vw_" + runid + "_" + domid
 graphic_type = "$GTYPE"
 EOF
 }
@@ -93,6 +93,8 @@ function write_conf()
             echo "Abort"
             exit 128
         fi
+        echo "make backup copy of $conf_file ..."
+        mv $conf_file "$conf_file".backup
     else
         echo "conf file is not present"
     fi
