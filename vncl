@@ -16,8 +16,6 @@ This is a wrapper function to run the ncl files in source directory.
 
 }
 
-plot_xy=( cape diffp )
-
 if [ $# -lt 1 ]; then
     usage $0
     exit
@@ -42,5 +40,7 @@ tmp_conf_end
 
 ## fun_to_call="${1%.[^.]*}" # strip out ".ncl" if present
 ## ncl $VISWRF/$fun_to_call.ncl
+
+plot_xy=(cape diffp zave_wind div10)
 
 ncl $VISWRF/plot_xy.ncl
