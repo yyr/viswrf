@@ -1,19 +1,28 @@
 #!/usr/bin/env python3
-#
-# Copyright (C) Yagnesh Raghava Yakkala. http://yagnesh.org
-#    File: conf.py
-# Created: Sunday, January 22 2012
-# License: GPL v3 or later. <http://www.gnu.org/licenses/gpl.html>
-#
-# Description:
-# conf.ncl creation and manipulation things
+'''
 
-def print_error(str):
+conf.ncl creation and manipulation things
+
+'''
+
+class Conf(object):
+    """ Writes conf file
     """
 
-    Arguments:
-    - `str`:
-    """
-    print("bro this is what you sent", str)
+    def __init__(self):
+        """
+        Arguments:
+        - `dir`:
+        """
+        self._test = "I am called"
+        print(self._test)
+
+
+def main():
+    print("you called this directly")
+
+if __name__ == '__main__':
+    main()
+
 
 # conf.py ends here

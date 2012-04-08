@@ -1,28 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__  = 'Yagnesh Raghava Yakkala'
-
-__license__ = 'GPL v3 or later'
-
-__version__ = 'no version yet'
+AUTHOR  = 'Yagnesh Raghava Yakkala'
+LICENSE = 'GPL v3 or later'
+VERSION = 'not versioned yet'
 
 import os
 import sys
-
+from viswrf import conf
 
 def main():
     import argparse
+    parser = argparse.ArgumentParser(
+        description='Configuration and Plotting Options')
 
-    parser = argparse.ArgumentParser(description='Configuration and Plotting Options')
-
-    parser.add_argument('plotid', action="append",
-                        help='Plot type')
-    parser.add_argument('conf', action='append',
-                        help='Configuration Options')
-
+    parser.add_argument('-c', '--conf', default='conf')
+    parser.add_argument('-p', '--plot', default='Test')
     args = parser.parse_args()
-
 
 # ---------------------
 if __name__ == '__main__':
