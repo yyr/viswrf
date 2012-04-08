@@ -4,22 +4,43 @@
 conf.ncl creation and manipulation things
 
 '''
+import sys
 
 class Conf(object):
     """ Writes conf file
     """
 
-    def __init__(self):
+    def __init__(self,confargs):
         """
         Arguments:
         - `dir`:
         """
         self._test = "I am called"
-        print(self._test)
+        self.confargs=confargs
+        self.write_conf()
 
+    def write_conf(self):
+        print(self.confargs)
 
 def main():
-    print("you called this directly")
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='Configuration Options')
+
+    parser.add_argument('confargs',
+                    action='append',
+                    nargs='+',
+                    default=[],
+                    help='Add configuration options Eg: confsetting="a"')
+
+    if len(sys.argv)==1:
+        parser.print_help()
+        sys.exit(1)
+
+    args = parser.parse_args()
+
+    if args.confargs:
+        c = Conf(args.confargs)
 
 if __name__ == '__main__':
     main()
