@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 AUTHOR  = 'Yagnesh Raghava Yakkala'
@@ -7,7 +6,7 @@ VERSION = 'not versioned yet'
 
 import os
 import sys
-from viswrf import conf
+import conf
 
 def main():
     import argparse
@@ -16,26 +15,20 @@ def main():
 
     parser.add_argument('-c', '--conf',
                         action='append',
-                        dest='confargs',
+                        dest='conf_args',
                         nargs='+',
                         default=[],
-                        help='Add configuration options Eg: confsetting="a"')
+                        help='Add configuration options \
+                        plot_out_dir="~/plots/"')
 
-    parser.add_argument('-p','--plot',
-                        action='append',
-                        nargs='+',
-                        default=[],
-                        help="make a plot")
+    parser.add_argument('action',
+                        help="plot to make")
 
-    if len(sys.argv)==1:
-        parser.print_help()
-        sys.exit(1)
 
     args = parser.parse_args()
-    # print(args)
 
-    if args.confargs:
-        c = conf.Conf(args.confargs)
+    if args.conf_args:
+        pass
 
 # ---------------------
 if __name__ == '__main__':

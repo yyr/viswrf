@@ -1,11 +1,11 @@
+# -*- mode: conf-unix; -*-
+
 *~
 *.o
 *.out
 *.html
 custom/*
-__pycache__/
+__pycache__/*
 TAGS
 
-## Local Variables:
-## mode: conf
-## End:
+*.pyc
