@@ -20,24 +20,16 @@ load "$TMP/tmp_conf.ncl"             ; for command line options
 ; tsvals
 
 begin
-;;--------------------------------------------------------------------
-; IO setup
   a = addfile(infile , "r")
   ofile = ofile_prefix + "_" + plotid + "_xy"
-
-;;--------------------------------------------------------------------
-; time setup
 
   if ( tvals .eq. -1 ) then
     times  = wrf_user_list_times(a)  ; get times in the file
   end if
   nt  = dimsizes(times)         ; number of times in the file
 
-;;----------------------- graphic mode --------------------------------
   wks = gsn_open_wks(graphic_type,ofile)
 
-;;--------------------------------------------------------------------
-; Initial resources esources
   res = True
   opts = res
   pltres = True ; Plot resources
@@ -45,16 +37,13 @@ begin
 
   plot_xy_set_map_att(mpres)
 
-;;--------------------------------------------------------------------
-; initialize graph
   plot = new(nt,graphic)
 
-;;--------------- grab the fields defined in the dictionary -----------
   varname = varname@$plotid$
   lev = lev@$varname$
   clevs = clevs@$varname$
 
-;;--------------------- cape calculation -----------------------------
+  ;;--------------------- cape calculation -----------------------------
   if ( varname .eq. "cape" ) then
 
     gsn_define_colormap(wks,"WhiteYellowOrangeRed")
@@ -76,7 +65,7 @@ begin
 
   end if ;;-- cape  --
 
-;;--------------------- diffp -----------------------------
+  ;;--------------------- diffp -----------------------------
   if ( varname .eq. "diffp" ) then
 
     do it = 48, nt, 2   ;; time loop
@@ -103,8 +92,6 @@ begin
     end do
 
   end if ;;-- diffp  --
-
-;;--------------------- zave_wind -----------------------------
 
   if ( varname .eq. "zave_wind" ) then
 
@@ -143,7 +130,7 @@ begin
   end if ;;-- diffp  --
 
 
-;;------------------------ divergence 10m level ----------------------
+  ;;------------------------ divergence 10m level ----------------------
 
   if ( varname .eq. "div10" ) then
 
@@ -182,14 +169,13 @@ begin
 
   end if ;;-- div10  --
 
+
   if ( varname .eq. "temp2m" ) then
 
     do it = 28, nt, 2   ;; time
 
-      ;; hint what time
       print("Working on time: " + times(it))
 
-      ;;-- calcualtion  --
       u = wrf_user_getvar(a,"ua",it) ; at mass point
       v = wrf_user_getvar(a,"va",it) ; at mass point
 
